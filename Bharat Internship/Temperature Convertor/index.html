@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        <div>
+            <input type="text" id="input-value" placeholder="Enter temperature" />
+        </div>
+        <div>
+            <input type="radio" name="unit" value="celsius" id="celsius" checked />
+            <label for="celsius">Celsius</label>
+
+            <input type="radio" name="unit" value="fahrenheit" id="fahrenheit" />
+            <label for="fahrenheit">Fahrenheit</label>
+        </div>
+        <div>
+            <input type="radio" name="outputUnit" value="celsius" id="output-celsius" checked />
+            <label for="output-celsius">Celsius</label>
+
+            <input type="radio" name="outputUnit" value="fahrenheit" id="output-fahrenheit" />
+            <label for="output-fahrenheit">Fahrenheit</label>
+        </div>
+        <button onclick="convertTemperature()">Convert</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        function convertTemperature() {
+            const inputValue = parseFloat(document.getElementById('input-value').value);
+            const inputUnit = document.querySelector('input[name="unit"]:checked').value;
+            const outputUnit = document.querySelector('input[name="outputUnit"]:checked').value;
+            let result;
+
+            if (inputUnit === 'celsius' && outputUnit === 'fahrenheit') {
+                result = (inputValue * 9/5) + 32;
+            } else if (inputUnit === 'fahrenheit' && outputUnit === 'celsius') {
+                result = (inputValue - 32) * 5/9;
+            } else {
+                result = inputValue; // Same unit, no conversion needed
+            }
+
+            document.getElementById('result').textContent = `Result: ${result.toFixed(2)} ${outputUnit}`;
+        }
+</script>    
+</body>
+</html>
